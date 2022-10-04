@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/back"
+    tools:context=".Registration">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/montserrat_alternates_semibold"
+        android:text="@string/H1Reg"
+        android:textAlignment="center"
+        android:textColor="@color/active"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back" />
+
+
+    <Button
+        android:id="@+id/btnreg"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="#F4F4F4"
+        android:background="@drawable/btnpress"
+        android:fontFamily="@font/montserrat_alternates_semibold"
+        android:state_pressed="true"
+        android:text="@string/btnReg"
+        android:enabled="false"
+        android:textAllCaps="false"
+        android:textColor="@color/un_active"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btngen"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/btnpress"
+        android:fontFamily="@font/montserrat_alternates_semibold"
+        android:state_pressed="true"
+        android:text="@string/btngen"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toTopOf="@+id/btnreg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/RegEmail"
+
+
+        style="@style/FirebaseUI.TextInputLayout.EmailField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+
+
+        android:hint="@string/MailReg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RegName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edEmail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:fontFamily="@font/montserrat_alternates"
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp"
+            android:backgroundTint="@color/active"
+            android:textColor="@color/active"
+            android:textColorHighlight="@color/active"
+            android:textColorLink="@color/active"
+            android:textSize="18sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/RegGroup"
+        style="@style/FirebaseUI.TextInputLayout.EmailField"
+
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+
+        android:hint="@string/GroupeReg"
+        android:inputType="textPersonName"
+
+        app:endIconMode="clear_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RegEmail">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edGroup"
+
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/active"
+            android:ems="10"
+            android:fontFamily="@font/montserrat_alternates"
+            android:minHeight="48dp"
+            android:textColor="@color/active"
+            android:textColorHighlight="@color/active"
+            android:textColorHint="@color/un_active"
+            android:textColorLink="@color/active"
+            android:textSize="18sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/RegDGroup"
+        style="@style/FirebaseUI.TextInputLayout.NameField"
+
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:ems="10"
+
+
+        android:hint="@string/DopGroupeReg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RegEmail">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edDGroup"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/active"
+            android:ems="10"
+            android:fontFamily="@font/montserrat_alternates"
+            android:inputType="number"
+            android:maxLength="1"
+            android:minHeight="48dp"
+            android:textColor="@color/active"
+            android:textColorHighlight="@color/active"
+            android:textColorHint="@color/un_active"
+            android:textColorLink="@color/active"
+            android:textSize="18sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/RegName"
+
+
+        style="@style/FirebaseUI.TextInputLayout.NameField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:hint="@string/NameReg"
+
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/active"
+            android:ems="10"
+            android:fontFamily="@font/montserrat_alternates"
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp"
+            android:textColor="@color/active"
+            android:textColorHighlight="@color/active"
+            android:textColorLink="@color/active"
+            android:textSize="18sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Spinner
+        android:id="@+id/RegType"
+
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="@color/active"
+        android:ems="10"
+        android:entries="@array/type"
+        android:fontFamily="@font/montserrat_alternates"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:textColor="@color/active"
+        android:textColorHighlight="@color/active"
+        android:textColorLink="@color/active"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/h2" />
+
+    <TextView
+        android:id="@+id/h2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/montserrat_alternates"
+        android:text="@string/TypeReg"
+        android:textColorHighlight="@color/active"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RegGroup" />
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="@string/todo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back" />
+
+    <TextView
+        android:id="@+id/pasgen"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/montserrat_alternates_semibold"
+        android:hint="Сгенерируйте пароль"
+        android:minHeight="48dp"
+        android:selectAllOnFocus="true"
+        android:textAlignment="center"
+        android:textColor="@color/dark"
+        android:textIsSelectable="true"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/btngen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

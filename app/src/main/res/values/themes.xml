@@ -1,0 +1,51 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Theme.FishFord" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorControlActivated">@color/active</item>
+        <item name="colorControlNormal">@color/un_active</item>
+        <item name="colorPrimaryDark">@color/active</item>
+    </style>
+
+    <style name="HomePageTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorControlActivated">@color/active</item>
+        <item name="colorControlNormal">@color/un_active</item>
+        <item name="colorPrimaryDark">@color/active</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorControlActivated">@color/active</item>
+        <item name="colorControlNormal">@color/un_active</item>
+        <item name="colorPrimaryDark">@color/active</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <item name="android:windowBackground">@drawable/splashscreen</item>
+    </style>
+
+    <style name="AlertDialogDanger" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/active</item>
+        <item name="colorControlActivated">@color/active</item>
+        <item name="colorPrimaryDark">@color/active</item>
+        <item name="colorPrimary">@color/active</item>
+    </style>
+
+    <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="colorAccent">@color/active</item>
+        <item name="colorControlNormal">@color/active</item>
+        <item name="boxStrokeColor">@color/active</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="hintTextColor">@color/active</item>
+        <item name="backgroundTint">@color/active</item>
+        <item name="android:textCursorDrawable">@color/active</item>
+        <item name="colorPrimary">@color/active</item>
+    </style>
+
+</resources>

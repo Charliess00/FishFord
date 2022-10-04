@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "667072501769",
+    "project_id": "fishford-d02f6",
+    "storage_bucket": "fishford-d02f6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667072501769:android:5559fe355eea71694740d8",
+        "android_client_info": {
+          "package_name": "com.example.fishford"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "667072501769-ja4nmpa57b0hfg65mske2qcnb8fiqacb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fishford",
+            "certificate_hash": "322e75a66fa6aa903cd8c6e3e837c3a4604b76e2"
+          }
+        },
+        {
+          "client_id": "667072501769-mthoeaefvv83bgtudho1k2fq2phrmqqt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcfYR4bEg-f8wXRRvAmXYr0EAJz4I_vks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "667072501769-mthoeaefvv83bgtudho1k2fq2phrmqqt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
