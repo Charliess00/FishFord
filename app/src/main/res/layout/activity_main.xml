@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginRight="30dp"
         android:buttonTint="@color/active"
         android:fontFamily="@font/montserrat_alternates_light"
@@ -58,32 +58,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/no_pass" />
 
-    <EditText
-        android:id="@+id/InPass"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="30dp"
-        android:autofillHints=""
-        android:backgroundTint="@color/un_active"
-        android:fontFamily="@font/montserrat_alternates"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:minHeight="48dp"
-        android:textColor="@color/active"
-        android:textColorHint="@color/un_active"
-        android:textColorLink="@color/active"
-        android:textSize="16sp"
-        app:endIconMode="password_toggle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/InEmail"
-        app:passwordToggleEnabled="true"
-        tools:ignore="TextContrastCheck" />
-
-    <EditText
-        android:id="@+id/InEmail"
+    <!-- <EditText
+        android:id="@+id/EdEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -95,16 +71,16 @@
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:textColor="@color/active"
-        android:textColorHighlight="@color/active"
+        android:textColorHighlight="@android:color/holo_blue_bright"
         android:textColorHint="@color/un_active"
-        android:backgroundTint="@color/un_active"
+        android:backgroundTint="@color/active"
         android:textColorLink="@color/active"
         android:fontFamily="@font/montserrat_alternates"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:ignore="TextContrastCheck" />
+        tools:ignore="TextContrastCheck" /> -->
 
     <TextView
         android:id="@+id/textView"
@@ -134,7 +110,7 @@
         android:textColor="@color/active"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/InPass"
+        app:layout_constraintTop_toBottomOf="@+id/LayPass"
         tools:ignore="TextContrastCheck" />
 
     <TextView
@@ -150,10 +126,94 @@
         android:gravity="center"
         android:textAlignment="center"
         android:textColor="@color/err"
+        android:textSize="14sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:visibility="visible" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/LayEmail"
+
+        style="@style/LoginTextInputLayoutStyle"
+
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="32dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:fontFamily="@font/montserrat_alternates"
+        android:hint="@string/e_mail"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:textSize="16sp"
+        app:endIconMode="clear_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:startIconDrawable="@drawable/ic_email">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/InEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/active"
+            android:textColor="@color/active"
+            android:inputType="textEmailAddress"
+            android:textColorHighlight="@android:color/holo_blue_bright"
+            android:textColorHint="@color/un_active"
+            android:textColorLink="@color/active"
+            android:textCursorDrawable="@null" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/LayPass"
+
+        style="@style/LoginTextInputLayoutStyle"
+
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:fontFamily="@font/montserrat_alternates"
+        android:hint="@string/password"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:textSize="16sp"
+        app:endIconTint="@color/active"
+        app:endIconMode="password_toggle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LayEmail"
+        app:startIconDrawable="@drawable/ic_lock">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/InPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/active"
+            android:textColor="@color/active"
+            android:inputType="textPassword"
+            android:textColorHighlight="@android:color/holo_blue_bright"
+            android:textColorHint="@color/un_active"
+            android:textColorLink="@color/active"
+            android:textCursorDrawable="@null" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

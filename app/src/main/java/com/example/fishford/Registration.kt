@@ -1,42 +1,65 @@
 package com.example.fishford
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 
 
 @Suppress("DEPRECATION")
 class Registration : AppCompatActivity() {
 
+
     private lateinit var edEmail: EditText
     private lateinit var edName: EditText
     private lateinit var edGroup: EditText
     private lateinit var edDopGroupe: EditText
-    private lateinit var edType: Spinner
+    private lateinit var edType: AutoCompleteTextView
     private lateinit var mDataBase: DatabaseReference
     private var USER_KEY = "User"
     private lateinit var reg: Button
     private lateinit var btngen: Button
     private lateinit var pass: TextView
     private lateinit var btn: ImageView
+    private lateinit var mAuth: FirebaseAuth
+
+
+    override fun onResume() {
+        super.onResume()
+
+        val arrayList = arrayOf("Student", "Teacher", "Admin")
+        val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item, arrayList)
+
+        edType.setAdapter(arrayAdapter)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 
-            btn = findViewById(R.id.back)
-            reg = findViewById(R.id.btnreg)
-            edName = findViewById(R.id.edName)
-            edEmail = findViewById(R.id.edEmail)
-            edGroup = findViewById(R.id.edGroup)
-            edDopGroupe = findViewById(R.id.edDGroup)
-            edType = findViewById(R.id.RegType)
-            btngen = findViewById(R.id.btngen)
-            pass = findViewById(R.id.pasgen)
-            mDataBase = FirebaseDatabase.getInstance().getReference(USER_KEY)
+        //inType = findViewById(R.id.InType)
+
+        edType = findViewById(R.id.RegType)
+        btn = findViewById(R.id.back)
+        reg = findViewById(R.id.btnreg)
+        edName = findViewById(R.id.edName)
+        edEmail = findViewById(R.id.edEmail)
+        edGroup = findViewById(R.id.edGroup)
+        edDopGroupe = findViewById(R.id.edDGroup)
+        btngen = findViewById(R.id.btngen)
+        pass = findViewById(R.id.pasgen)
+        mDataBase = FirebaseDatabase.getInstance().getReference(USER_KEY)
+        mAuth = Firebase.auth
 
         fun buttonundisable() {
             reg.isEnabled = true
@@ -45,10 +68,21 @@ class Registration : AppCompatActivity() {
         }
 
 
-        fun gen(){
-            val chars = ('a' .. 'Z') + ('A'..'Z') + ('0'..'9')
+        fun copyText(text: CharSequence) {
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("copy text", text)
+            clipboard.setPrimaryClip(clip)
+            Toast.makeText(this, "Скопировано в буфер обмена", Toast.LENGTH_SHORT).show()
+        }
+
+        fun gen() {
+            val chars = ('a'..'Z') + ('A'..'Z') + ('0'..'9')
             fun password(): String = List(8) { chars.random() }.joinToString("")
             pass.text = password()
+        }
+
+        pass.setOnClickListener {
+            copyText(pass.text.toString())
         }
 
         btngen.setOnClickListener {
@@ -75,31 +109,31 @@ class Registration : AppCompatActivity() {
 
             val groupe = edGroup.text.toString().trim()
             val dgroupe = edDopGroupe.text.toString().trim()
-            val type = edType.selectedItem.toString().trim()
+            val type = edType.text.toString().trim()
             val password = pass.text.toString().trim()
 
-            if(name.isEmpty()){
+            if (name.isEmpty()) {
                 edName.error = "Обязательное поле!"
                 //return@setOnClickListener
-            } else{
+            } else {
                 edName.error = null
             }
-            if (!res){
+            if (!res) {
                 edEmail.error = "Некорректная почта"
                 //return@setOnClickListener
-            }else{
+            } else {
                 edEmail.error = null
             }
-            if (groupe.isEmpty()){
+            if (groupe.isEmpty()) {
                 edGroup.error = "Обязательное поле!"
                 //return@setOnClickListener
-            }else{
+            } else {
                 edGroup.error = null
             }
-            if (dgroupe.isEmpty()){
+            if (dgroupe.isEmpty()) {
                 edDopGroupe.error = "Обязательное поле!"
                 //return@setOnClickListener
-            }else{
+            } else {
                 edDopGroupe.error = null
             }
             if (
@@ -108,14 +142,36 @@ class Registration : AppCompatActivity() {
                 and groupe.isNotEmpty()
                 and dgroupe.isNotEmpty()
             ) {
-                val newUser = RegUsers(id, name, email, type, groupe, dgroupe, password)
-                mDataBase.push().setValue(newUser)
+                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(
+                    OnCompleteListener {
+                        if (it.isSuccessful){
+                            val newUser = RegUsers(id, name, email, type, groupe, dgroupe)
+                            mDataBase.push().setValue(newUser)
 
-                Toast.makeText(this, "Успешно добавлено!", Toast.LENGTH_SHORT).show()
-            } else{
+                            Toast.makeText(this, "Успешно!", Toast.LENGTH_SHORT).show()
+                            tohp()
+                        }else {
+                            Toast.makeText(this, "Ошибка при регистрации!", Toast.LENGTH_SHORT).show()
+                        }
+                    })
+            } else {
                 return@setOnClickListener
             }
         }
+
+    }
+
+    private fun tohp(){
+        val tohome = Intent(this, HomePage::class.java)
+        tohome.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(tohome)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        //val cUser = mAuth.currentUser
+
 
     }
 }

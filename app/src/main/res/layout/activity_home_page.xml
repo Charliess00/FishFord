@@ -8,88 +8,31 @@
     tools:context=".HomePage">
 
     <TextView
-        android:id="@+id/dopgroup"
-        android:layout_width="25dp"
-        android:layout_height="wrap_content"
-
-
-        android:layout_marginTop="15dp"
-        android:background="@drawable/tag_style"
-        android:backgroundTint="#E2A5FF"
-        android:fontFamily="@font/montserrat_alternates_light"
-        android:gravity="center"
-        android:text="@string/dopgroup"
-        android:textColor="@color/black"
-        android:textSize="11sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/avatar"
-        tools:ignore="TextContrastCheck" />
-
-    <TextView
-        android:id="@+id/group"
-        android:layout_width="65dp"
-        android:layout_height="wrap_content"
-
-
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/tag_style"
-
-        android:fontFamily="@font/montserrat_alternates_light"
-        android:gravity="center"
-        android:text="@string/group"
-        android:textColor="@color/black"
-        android:textSize="11sp"
-        app:layout_constraintEnd_toStartOf="@+id/dopgroup"
-        app:layout_constraintTop_toBottomOf="@+id/avatar" />
-
-    <TextView
-        android:id="@+id/type"
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-
-        android:layout_marginStart="8dp"
-
-
-        android:layout_marginTop="15dp"
-        android:background="@drawable/tag_style"
-        android:backgroundTint="#A0B5FF"
-        android:fontFamily="@font/montserrat_alternates_light"
-        android:gravity="center"
-        android:text="@string/type"
-
-        android:textColor="@color/black"
-        android:textSize="11sp"
-        app:layout_constraintStart_toEndOf="@+id/dopgroup"
-        app:layout_constraintTop_toBottomOf="@+id/avatar" />
-
-    <TextView
         android:id="@+id/Name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
         android:fontFamily="@font/montserrat_alternates_semibold"
         android:includeFontPadding="false"
         android:text="@string/Username"
         android:textAlignment="center"
         android:textColor="@color/dark"
-        android:textSize="24sp"
+        android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dopgroup" />
+        app:layout_constraintTop_toBottomOf="@+id/tag_conteiner" />
 
     <ImageView
         android:id="@+id/avatar"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
         android:contentDescription="@string/todo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exiticon"
         app:srcCompat="@drawable/no_avatar"
@@ -110,7 +53,7 @@
         android:id="@+id/h1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="50dp"
         android:fontFamily="@font/montserrat_alternates_medium"
         android:text="@string/h1"
@@ -130,5 +73,76 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/sliders"
         android:contentDescription="@string/todo" />
+
+    <LinearLayout
+        android:id="@+id/tag_conteiner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/avatar"
+        app:layout_constraintStart_toStartOf="@+id/avatar"
+        app:layout_constraintTop_toBottomOf="@+id/avatar">
+
+        <TextView
+            android:id="@+id/group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            android:background="@drawable/tag_style"
+            android:fontFamily="@font/montserrat_alternates_light"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:paddingTop="2dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="2dp"
+            android:text="@string/group"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            tools:ignore="TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/dopgroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/tag_style"
+            android:backgroundTint="#E2A5FF"
+            android:fontFamily="@font/montserrat_alternates_light"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:paddingTop="2dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="2dp"
+            android:text="@string/dopgroup"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            tools:ignore="TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            android:background="@drawable/tag_style"
+            android:backgroundTint="#A0B5FF"
+            android:fontFamily="@font/montserrat_alternates_light"
+            android:gravity="center"
+
+            android:paddingStart="10dp"
+            android:paddingTop="2dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="2dp"
+            android:text="@string/type"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            tools:ignore="TextContrastCheck" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

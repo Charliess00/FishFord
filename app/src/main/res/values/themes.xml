@@ -37,15 +37,34 @@
         <item name="colorPrimary">@color/active</item>
     </style>
 
-    <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+    <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="colorAccent">@color/active</item>
         <item name="colorControlNormal">@color/active</item>
         <item name="boxStrokeColor">@color/active</item>
-        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidth">2dp</item>
         <item name="hintTextColor">@color/active</item>
         <item name="backgroundTint">@color/active</item>
         <item name="android:textCursorDrawable">@color/active</item>
         <item name="colorPrimary">@color/active</item>
+        <item name="startIconTint">@color/active</item>
+        <item name="colorControlActivated">@color/active</item>
+        <item name="colorControlHighlight">@color/active</item>
+
+    </style>
+
+    <style name="LoginTextInputLayoutExposedStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="colorAccent">@color/active</item>
+        <item name="colorControlNormal">@color/active</item>
+        <item name="boxStrokeColor">@color/active</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="hintTextColor">@color/active</item>
+        <item name="backgroundTint">@color/active</item>
+        <item name="colorControlActivated">@color/active</item>
+        <item name="colorControlHighlight">@color/active</item>
+        <item name="android:textCursorDrawable">@color/active</item>
+        <item name="colorPrimary">@color/active</item>
+        <item name="endIconTint">@color/active</item>
+
     </style>
 
 </resources>

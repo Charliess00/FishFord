@@ -22,9 +22,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var errmas : TextView
     private lateinit var flag : CheckBox
     private lateinit var nopass : TextView
-    private lateinit var auth: FirebaseAuth
-
-    //private var SIGHT_IN_CODE = 1
+    private lateinit var mAuth: FirebaseAuth
 
     private fun tohp(){
         val tohome = Intent(this, HomePage::class.java)
@@ -33,37 +31,27 @@ class LoginActivity : AppCompatActivity() {
 
     private fun updateUI(currentUser: FirebaseUser?) {
         if(currentUser != null){
-            Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Вы успешно авторизованы!", Toast.LENGTH_SHORT).show()
+            tohp()
 
         }else {
-            Toast.makeText(this,"You Didnt signed in",Toast.LENGTH_LONG).show()
+            Toast.makeText(this,"Необходима авторизация!",Toast.LENGTH_LONG).show()
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        // User not Auth
-        //if(FirebaseAuth.getInstance().currentUser == null)
-        //    startActivity(AuthUI.getInstance().createSignInIntentBuilder().build(), SIGHT_IN_CODE)
-        //else
-        //    toHomePage()
+        init()
 
 
-        inemail = findViewById(R.id.InEmail)
-        inpass = findViewById(R.id.InPass)
-        btnlogin = findViewById(R.id.btnlogin)
-        errmas = findViewById(R.id.errmas)
-        flag = findViewById(R.id.rules)
-        nopass = findViewById(R.id.no_pass)
-        auth = Firebase.auth
+
 
         nopass.setOnClickListener{
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Забыли пароль?")
-            builder.setMessage("Для восстановления пароля обратитесь к своему системному администратору!")
-            builder.setNegativeButton("OK"){dialog, i->}
+            builder.setMessage("Для сброса пароля обратитесь к своему системному администратору!")
+            builder.setNegativeButton("OK"){ _, _ ->}
 
             val alert11: AlertDialog = builder.create()
             alert11.show()
@@ -78,6 +66,7 @@ class LoginActivity : AppCompatActivity() {
             val pass = inpass.text.toString().trim()
            // val lpass = pass.length
 
+            /*
             fun inemailerr(){
                 inemail.setHintTextColor(ContextCompat.getColor(this, R.color.err))
                 inemail.backgroundTintList = ContextCompat.getColorStateList(this, R.color.err)
@@ -97,38 +86,52 @@ class LoginActivity : AppCompatActivity() {
                 inemail.setHintTextColor(ContextCompat.getColor(this, R.color.active))
                 inemail.backgroundTintList = ContextCompat.getColorStateList(this, R.color.active)
             }
-
+             */
             if  (email.isEmpty() and pass.isEmpty()){
-                inemailerr()
-                inpasserr()
+                //inemailerr()
+                //inpasserr()
                 errmas.text = getString(R.string.errmas2)
                 errmas.isVisible = true
                 return@setOnClickListener
                 }
             if (email.isEmpty() and pass.isNotEmpty()){
-                inemailerr()
-                inpassact()
+                //inemailerr()
+                //inpassact()
                 errmas.text = getString(R.string.errmasemail)
                 errmas.isVisible = true
                 return@setOnClickListener
             }
             if (email.isNotEmpty() and pass.isEmpty()){
-                inemailact()
-                inpasserr()
+                //inemailact()
+                //inpasserr()
                 errmas.text = getString(R.string.errmaspass)
                 errmas.isVisible = true
                 return@setOnClickListener
             }
 
             if  (flag.isChecked) {
+
+
                 if(email.isNotEmpty() and pass.isNotEmpty()){
-                    flag.buttonTintList = ContextCompat.getColorStateList(this, R.color.active)
-                    errmas.isVisible = false
-                    tohp()
+                    mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            flag.buttonTintList =
+                                ContextCompat.getColorStateList(this, R.color.active)
+                            errmas.isVisible = false
+                            tohp()
+                        } else {
+                            //inemailact()
+                            //inpassact()
+                            errmas.text = getString(R.string.valerr)
+                            errmas.isVisible = true
+                        }
+                    }
+
+
                 }
                 }else{
-                inemailact()
-                inpassact()
+                //inemailact()
+                //inpassact()
                 flag.buttonTintList = ContextCompat.getColorStateList(this, R.color.err)
                 errmas.text = getString(R.string.errmasbox)
                 errmas.isVisible = true
@@ -137,10 +140,21 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun init() {
+        inemail = findViewById(R.id.InEmail)
+        inpass = findViewById(R.id.InPass)
+        btnlogin = findViewById(R.id.btnlogin)
+        errmas = findViewById(R.id.errmas)
+        flag = findViewById(R.id.rules)
+        nopass = findViewById(R.id.no_pass)
+        mAuth = Firebase.auth
+    }
+
+
     override fun onStart() {
         super.onStart()
 
-        val currentUser = auth.currentUser
+        val currentUser = mAuth.currentUser
 
         updateUI(currentUser)
     }

@@ -12,8 +12,10 @@
     <string name="errmaspass"><font color="#FE5151">Введите ваш пароль!</font></string>
     <string name="errmasbox"><font color="#FE5151">Ознакомьтесь с правилами!</font></string>
     <string name="errmas2"><font color="#FE5151">Введите правильно почту!\nВведите правильно пароль!</font></string>
+    <string name="valerr"><font color="#FE5151">Неверный Email или Пароль!</font></string>
     <string name="ruleserr"><font color="#272727">Согласен с </font><font color="#FE5151">правилами</font></string>
-    
+
+
     <string name="Username">Тимофеев Игнат Олегович</string>
     <string name="avatars">avatar</string>
 
@@ -32,11 +34,7 @@
     <string name="NameReg">Фамилия Имя Отчество *</string>
     <string name="TypeReg">Категория *</string>
     <string name="btngen">Сгенерировать пароль</string>
-    <string-array name="type">
-        <item>Student</item>
-        <item>Teacher</item>
-        <item>Admin</item>
-    </string-array>
+    <string name="hintgen">Сгенерируйте пароль</string>
 
 
 </resources>
