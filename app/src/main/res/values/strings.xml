@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">FishFord</string>
 
     <string name="rules"><font color="#272727">Согласен с </font><font color="#3B7E91">правилами</font></string>
@@ -8,22 +8,17 @@
     <string name="Hello">Добро пожаловать!</string>
     <string name="no_pass">Забыли пароль?</string>
 
-    <string name="errmasemail"><font color="#FE5151">Введите вашу почту!</font></string>
-    <string name="errmaspass"><font color="#FE5151">Введите ваш пароль!</font></string>
-    <string name="errmasbox"><font color="#FE5151">Ознакомьтесь с правилами!</font></string>
-    <string name="errmas2"><font color="#FE5151">Введите правильно почту!\nВведите правильно пароль!</font></string>
     <string name="valerr"><font color="#FE5151">Неверный Email или Пароль!</font></string>
-    <string name="ruleserr"><font color="#272727">Согласен с </font><font color="#FE5151">правилами</font></string>
 
 
-    <string name="Username">Тимофеев Игнат Олегович</string>
+    <string name="Username">…</string>
     <string name="avatars">avatar</string>
 
     <string name="todo">TODO</string>
 
-    <string name="group" tools:ignore="TypographyDashes">   И–2-20   </string>
-    <string name="dopgroup">   2   </string>
-    <string name="type">   Student   </string>
+    <string name="group">   null   </string>
+    <string name="dopgroup">   -   </string>
+    <string name="type">   null   </string>
 
     <string name="h1">Ваше расписание</string>
     <string name="H1Reg">Регистрация нового пользователя</string>

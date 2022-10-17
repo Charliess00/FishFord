@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
@@ -19,20 +18,17 @@ import com.google.firebase.ktx.Firebase
 @Suppress("DEPRECATION")
 class Registration : AppCompatActivity() {
 
-
     private lateinit var edEmail: EditText
     private lateinit var edName: EditText
     private lateinit var edGroup: EditText
     private lateinit var edDopGroupe: EditText
     private lateinit var edType: AutoCompleteTextView
     private lateinit var mDataBase: DatabaseReference
-    private var USER_KEY = "User"
     private lateinit var reg: Button
     private lateinit var btngen: Button
     private lateinit var pass: TextView
     private lateinit var btn: ImageView
     private lateinit var mAuth: FirebaseAuth
-
 
     override fun onResume() {
         super.onResume()
@@ -47,8 +43,6 @@ class Registration : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 
-        //inType = findViewById(R.id.InType)
-
         edType = findViewById(R.id.RegType)
         btn = findViewById(R.id.back)
         reg = findViewById(R.id.btnreg)
@@ -58,7 +52,7 @@ class Registration : AppCompatActivity() {
         edDopGroupe = findViewById(R.id.edDGroup)
         btngen = findViewById(R.id.btngen)
         pass = findViewById(R.id.pasgen)
-        mDataBase = FirebaseDatabase.getInstance().getReference(USER_KEY)
+        mDataBase = FirebaseDatabase.getInstance().getReference("User")
         mAuth = Firebase.auth
 
         fun buttonundisable() {
@@ -114,25 +108,21 @@ class Registration : AppCompatActivity() {
 
             if (name.isEmpty()) {
                 edName.error = "Обязательное поле!"
-                //return@setOnClickListener
             } else {
                 edName.error = null
             }
             if (!res) {
                 edEmail.error = "Некорректная почта"
-                //return@setOnClickListener
             } else {
                 edEmail.error = null
             }
             if (groupe.isEmpty()) {
                 edGroup.error = "Обязательное поле!"
-                //return@setOnClickListener
             } else {
                 edGroup.error = null
             }
             if (dgroupe.isEmpty()) {
                 edDopGroupe.error = "Обязательное поле!"
-                //return@setOnClickListener
             } else {
                 edDopGroupe.error = null
             }
@@ -142,18 +132,20 @@ class Registration : AppCompatActivity() {
                 and groupe.isNotEmpty()
                 and dgroupe.isNotEmpty()
             ) {
-                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(
-                    OnCompleteListener {
-                        if (it.isSuccessful){
-                            val newUser = RegUsers(id, name, email, type, groupe, dgroupe)
-                            mDataBase.push().setValue(newUser)
 
-                            Toast.makeText(this, "Успешно!", Toast.LENGTH_SHORT).show()
-                            tohp()
-                        }else {
-                            Toast.makeText(this, "Ошибка при регистрации!", Toast.LENGTH_SHORT).show()
-                        }
-                    })
+                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        val uid = mAuth.uid.toString()
+                        val newUser = RegUsers(id, name, email, type, groupe, dgroupe, password)
+                        mDataBase.child(uid).setValue(newUser)
+
+                        Toast.makeText(this, "Успешно!", Toast.LENGTH_SHORT).show()
+                        tohp()
+                    } else {
+                        Toast.makeText(this, "Ошибка при регистрации!", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
             } else {
                 return@setOnClickListener
             }
@@ -165,13 +157,5 @@ class Registration : AppCompatActivity() {
         val tohome = Intent(this, HomePage::class.java)
         tohome.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(tohome)
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        //val cUser = mAuth.currentUser
-
-
     }
 }
