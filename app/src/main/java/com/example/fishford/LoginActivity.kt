@@ -3,6 +3,7 @@ package com.example.fishford
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import com.example.fishford.items.LoadingDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -24,6 +26,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var errmas: TextView
     private lateinit var nopass: TextView
     private lateinit var mAuth: FirebaseAuth
+    val loading = LoadingDialog(this)
 
     private fun tohp() {
         val tohome = Intent(this, HomePage::class.java)
@@ -42,8 +45,6 @@ class LoginActivity : AppCompatActivity() {
         init()
 
 
-
-
         nopass.setOnClickListener {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Забыли пароль?")
@@ -59,6 +60,8 @@ class LoginActivity : AppCompatActivity() {
 
         btnlogin.setOnClickListener {
 
+            showLoading()
+
             val email = inemail.text.toString().trim()
             val pass = inpass.text.toString().trim()
 
@@ -66,20 +69,31 @@ class LoginActivity : AppCompatActivity() {
                 email.isNotEmpty()
                 and pass.isNotEmpty()
             ) {
-
                 mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
                     if (it.isSuccessful) {
                         errmas.isVisible = false
                         tohp()
                     } else {
+                        disLoading()
                         errmas.isVisible = true
                     }
                 }
             } else {
+                disLoading()
                 errmas.isVisible = true
                 return@setOnClickListener
             }
         }
+    }
+
+    private fun disLoading() {
+        Log.d("MyLog", "Загрузка завершена.")
+        loading.isDis()
+    }
+
+    private fun showLoading() {
+        Log.d("MyLog", "Загрузка...")
+        loading.showLoading()
     }
 
     private fun init() {

@@ -4,6 +4,7 @@
         <!-- Primary brand color. -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/active</item>
         <item name="colorControlActivated">@color/active</item>
         <item name="colorControlNormal">@color/un_active</item>
         <item name="colorPrimaryDark">@color/active</item>
@@ -13,6 +14,7 @@
         <!-- Primary brand color. -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/active</item>
         <item name="colorControlActivated">@color/active</item>
         <item name="colorControlNormal">@color/un_active</item>
         <item name="colorPrimaryDark">@color/active</item>

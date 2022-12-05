@@ -1,4 +1,4 @@
-package com.example.fishford
+package com.example.fishford.items
 
 class PasswordGenerator {
 

@@ -8,7 +8,7 @@
     tools:context=".Registration">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/h1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -50,7 +50,7 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="60dp"
         android:background="@drawable/btnpress"
         android:fontFamily="@font/montserrat_alternates_semibold"
@@ -109,37 +109,32 @@
         app:boxCornerRadiusBottomStart="20dp"
         app:boxCornerRadiusTopEnd="20dp"
         app:boxCornerRadiusTopStart="20dp"
+        style="@style/LoginTextInputLayoutExposedStyle"
 
-        style="@style/LoginTextInputLayoutStyle"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-
         android:hint="@string/GroupeReg"
-
-
-        app:endIconMode="clear_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RegEmail">
+        app:layout_constraintTop_toBottomOf="@+id/RegEmail"
 
-        <com.google.android.material.textfield.TextInputEditText
+        android:layout_marginEnd="32dp"
+        android:background="@color/back"
+        android:textColorHint="#6D767B">
+
+        <AutoCompleteTextView
             android:id="@+id/edGroup"
 
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/active"
-            android:ems="10"
-            android:inputType="textCapCharacters"
+            android:layout_height="match_parent"
             android:fontFamily="@font/montserrat_alternates"
-            android:minHeight="48dp"
             android:padding="16dp"
-
             android:textColor="@color/active"
-            android:textCursorDrawable="@null"
             android:textSize="16sp"
-            tools:ignore="TextContrastCheck" />
+            app:endIconTint="@color/active"
+            tools:ignore="LabelFor" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -202,7 +197,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/h1">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edName"
@@ -285,12 +280,12 @@
             android:hint="@null"
             android:inputType="none"
             android:padding="16dp"
-            android:text="@string/type"
+            android:text="Student"
             android:textColor="@color/active"
             android:textCursorDrawable="@null"
             android:textSize="16sp"
             app:endIconTint="@color/active"
-            tools:ignore="TextContrastCheck" />
+            tools:ignore="HardcodedText,TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

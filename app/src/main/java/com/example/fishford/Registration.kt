@@ -1,17 +1,21 @@
 package com.example.fishford
 
+import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.example.fishford.items.LoadingDialog
+import com.google.firebase.FirebaseApp
+import com.google.firebase.FirebaseOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 
 
@@ -20,23 +24,65 @@ class Registration : AppCompatActivity() {
 
     private lateinit var edEmail: EditText
     private lateinit var edName: EditText
-    private lateinit var edGroup: EditText
+    private lateinit var edGroup: AutoCompleteTextView
     private lateinit var edDopGroupe: EditText
     private lateinit var edType: AutoCompleteTextView
     private lateinit var mDataBase: DatabaseReference
+    private lateinit var cuid: String
+    private lateinit var mDataBase2: DatabaseReference
     private lateinit var reg: Button
     private lateinit var btngen: Button
     private lateinit var pass: TextView
     private lateinit var btn: ImageView
     private lateinit var mAuth: FirebaseAuth
+    private lateinit var mAuth2: FirebaseAuth
+    private lateinit var listgroup: ArrayList<String>
+    private lateinit var databaseReference: DatabaseReference
+    private var loading = LoadingDialog(this)
+    private var ugroupe = ""
+    private var udopgroupe = ""
+    private var utype = ""
+
 
     override fun onResume() {
         super.onResume()
 
-        val arrayList = arrayOf("Student", "Teacher", "Admin")
+        val arrayList = arrayOf("Student", "Leader group", "Admin")
         val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item, arrayList)
 
+        listgroup = arrayListOf()
+        getDataFromDB()
+        val adaptergroup = ArrayAdapter(this, R.layout.dropdown_item, listgroup)
+
         edType.setAdapter(arrayAdapter)
+        edGroup.setAdapter(adaptergroup)
+        mAuth = Firebase.auth
+        cuid = mAuth.currentUser?.uid.toString()
+        if (cuid.isNotEmpty()) {
+            getUserData()
+        }
+    }
+
+    private fun getDataFromDB(){
+        mDataBase2 = FirebaseDatabase.getInstance().getReference("Group")
+
+        mDataBase2.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                if(snapshot.exists()){
+
+                    for(ds in snapshot.children){
+                        val group = ds.child("data").value.toString()
+                        listgroup.add(group)
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,12 +99,26 @@ class Registration : AppCompatActivity() {
         btngen = findViewById(R.id.btngen)
         pass = findViewById(R.id.pasgen)
         mDataBase = FirebaseDatabase.getInstance().getReference("User")
-        mAuth = Firebase.auth
 
+
+        val firebaseOptions = FirebaseOptions.Builder()
+            .setDatabaseUrl("[https://fishford-d02f6-default-rtdb.firebaseio.com/]")
+            .setApiKey("AIzaSyCcfYR4bEg-f8wXRRvAmXYr0EAJz4I_vks")
+            .setApplicationId("fishford-d02f6").build()
+
+        mAuth2 = try {
+            val myApp = FirebaseApp.initializeApp(applicationContext, firebaseOptions, "AnyAppName")
+            FirebaseAuth.getInstance(myApp)
+        } catch (e: IllegalStateException) {
+            FirebaseAuth.getInstance(FirebaseApp.getInstance("AnyAppName"))
+        }
         fun buttonundisable() {
             reg.isEnabled = true
-            reg.backgroundTintList = resources.getColorStateList(R.color.active)
-            reg.setTextColor(resources.getColorStateList(R.color.white))
+            //reg.backgroundTintList = resources.getColorStateList(R.color.active)
+            reg.backgroundTintList = ContextCompat.getColorStateList(this, R.color.active)
+            //reg.setTextColor(resources.getColorStateList(R.color.white))
+            reg.setTextColor(ContextCompat.getColorStateList(this, R.color.white))
+
         }
 
 
@@ -80,6 +140,7 @@ class Registration : AppCompatActivity() {
         }
 
         btngen.setOnClickListener {
+            gen()
             gen()
             buttonundisable()
         }
@@ -106,6 +167,13 @@ class Registration : AppCompatActivity() {
             val type = edType.text.toString().trim()
             val password = pass.text.toString().trim()
 
+            val groupeValid = listgroup.find { groupe == it }
+            if (groupeValid != null) {
+                Log.d("MyLog", groupeValid)
+            } else{
+                Log.d("MyLog", "null")}
+
+
             if (name.isEmpty()) {
                 edName.error = "Обязательное поле!"
             } else {
@@ -116,8 +184,8 @@ class Registration : AppCompatActivity() {
             } else {
                 edEmail.error = null
             }
-            if (groupe.isEmpty()) {
-                edGroup.error = "Обязательное поле!"
+            if (groupeValid == null) {
+                edGroup.error = "Данной группы нет в базе!"
             } else {
                 edGroup.error = null
             }
@@ -129,19 +197,25 @@ class Registration : AppCompatActivity() {
             if (
                 name.isNotEmpty()
                 and res
-                and groupe.isNotEmpty()
+                and (groupeValid != null)
                 and dgroupe.isNotEmpty()
             ) {
+                showLoading()
 
-                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
+                mAuth2.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        val uid = mAuth.uid.toString()
+                        val uid = mAuth2.uid.toString()
                         val newUser = RegUsers(id, name, email, type, groupe, dgroupe, password)
                         mDataBase.child(uid).setValue(newUser)
 
+                        mAuth2.signOut()
+                        disLoading()
+                        Log.d("MyLog", "Reg - Suc")
                         Toast.makeText(this, "Успешно!", Toast.LENGTH_SHORT).show()
                         tohp()
                     } else {
+                        disLoading()
+                        Log.d("MyLog", "Reg - Suc")
                         Toast.makeText(this, "Ошибка при регистрации!", Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -153,9 +227,47 @@ class Registration : AppCompatActivity() {
 
     }
 
+    @SuppressLint("SetTextI18n")
+    private fun getUserData() {
+        databaseReference = FirebaseDatabase.getInstance().getReference("User")
+        databaseReference.child(cuid).get().addOnSuccessListener {
+            if (it.exists()) {
+                ugroupe = it.child("groupe").value.toString()
+                udopgroupe = it.child("dgroupe").value.toString()
+                utype = it.child("type").value.toString()
+                if (utype == "Leader group"){
+                    Log.d("MyLog", "Заблокировано!!")
+
+                    edType.isEnabled = false
+                    edType.setText("Student")
+
+                    edGroup.isEnabled = false
+                    edGroup.setText(ugroupe)
+
+                    edDopGroupe.isEnabled = false
+                    edDopGroupe.setText(udopgroupe)
+                }
+            }
+
+        }.addOnFailureListener {
+            Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun showLoading() {
+        Log.d("MyLog", "Загрузка...")
+        //val loading = LoadingDialog(this)
+        loading.showLoading()
+
+    }
+
+    private fun disLoading() {
+        Log.d("MyLog", "Загрузка завершена.")
+        //val loading = LoadingDialog(this)
+        loading.isDis()
+    }
+
     private fun tohp(){
-        val tohome = Intent(this, HomePage::class.java)
-        tohome.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(tohome)
+        this.onBackPressed()
     }
 }

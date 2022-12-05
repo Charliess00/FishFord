@@ -30,6 +30,16 @@
     <string name="TypeReg">Категория *</string>
     <string name="btngen">Сгенерировать пароль</string>
     <string name="hintgen">Сгенерируйте пароль</string>
+    <string name="options_btn_reg">Регистрация пользователя</string>
+    <string name="options_btn_groupe">Добавление группы</string>
+    <string name="h1grad">Создание новой группы студентов</string>
+    <string name="btn_ad">Добавить</string>
+    <string name="para_1">1 \n<small> 8:00</small></string>
+    <string name="para_2">2 \n<small> 9:40</small></string>
+    <string name="para_3">3 \n<small> 11:30</small></string>
+    <string name="para_4">4 \n<small> 13:10</small></string>
+    <string name="para_5">5 \n<small> 14:50</small></string>
+    <string name="para_6">6 \n<small> 16:30</small></string>
 
 
 </resources>

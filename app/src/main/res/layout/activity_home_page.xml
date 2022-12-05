@@ -5,14 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/back"
-    tools:context=".HomePage">
+    tools:context=".HomePage"
+    tools:ignore="HardcodedText">
 
     <TextView
         android:id="@+id/Name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="60dp"
         android:fontFamily="@font/montserrat_alternates_semibold"
         android:includeFontPadding="false"
@@ -34,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/exiticon"
+        app:layout_constraintTop_toTopOf="@+id/exiticon"
         app:srcCompat="@drawable/no_avatar"
         tools:ignore="ImageContrastCheck" />
 
@@ -43,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:contentDescription="@string/todo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -54,25 +55,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="50dp"
-        android:fontFamily="@font/montserrat_alternates_medium"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/montserrat_alternates_bold"
         android:text="@string/h1"
         android:textColor="@color/active"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_week"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Name"
         tools:ignore="TextContrastCheck" />
 
     <ImageView
         android:id="@+id/sattingsicon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="30dp"
+        android:contentDescription="@string/todo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/sliders"
-        android:contentDescription="@string/todo" />
+        app:srcCompat="@drawable/sliders" />
 
     <LinearLayout
         android:id="@+id/tag_conteiner"
@@ -98,7 +99,7 @@
             android:paddingEnd="10dp"
             android:paddingBottom="2dp"
             android:text="@string/group"
-            android:textColor="@color/black"
+            android:textColor="@color/dark"
             android:textSize="12sp"
             tools:ignore="TextContrastCheck" />
 
@@ -119,7 +120,7 @@
             android:paddingEnd="10dp"
             android:paddingBottom="2dp"
             android:text="@string/dopgroup"
-            android:textColor="@color/black"
+            android:textColor="@color/dark"
             android:textSize="12sp"
             tools:ignore="TextContrastCheck" />
 
@@ -139,10 +140,317 @@
             android:paddingEnd="10dp"
             android:paddingBottom="2dp"
             android:text="@string/type"
-            android:textColor="@color/black"
+            android:textColor="@color/dark"
             android:textSize="12sp"
             tools:ignore="TextContrastCheck" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_week"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/montserrat_alternates_medium"
+        android:text="-"
+        android:textColor="@color/dark"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/montserrat_alternates_light"
+        android:text="-"
+        android:textColor="@color/gray"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_week"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/h1" />
+
+    <ImageView
+        android:id="@+id/upload_btn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="@string/todo"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_week"
+        app:srcCompat="@drawable/upload" />
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout style="@style/vertical_conteiner">
+
+                <TextView
+                    android:id="@+id/number"
+                    style="@style/table_number"
+                    android:layout_height="wrap_content"
+                    android:text="1" />
+
+                <TextView
+                    android:id="@+id/time"
+                    style="@style/table_time"
+                    android:text="8:00" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="345dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/para_one_chesl"
+                    style="@style/table_para"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/table_cheslitel"
+                    android:text="Проектирование информационных систем"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/para_one_znam"
+                    style="@style/table_para"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/table_znamenatel"
+                    android:gravity="center"
+                    android:text="Алгоритмизация и системный анализ" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                style="@style/vertical_conteiner"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:id="@+id/number2"
+                    style="@style/table_number"
+                    android:text="2" />
+
+                <TextView
+                    android:id="@+id/time2"
+                    style="@style/table_time"
+                    android:text="9:40" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="345dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/para_two_chesl"
+                    style="@style/table_para"
+                    android:background="@drawable/table_cheslitel"
+                    android:text="Проектирование информационных систем" />
+
+                <TextView
+                    android:id="@+id/para_two_znam"
+                    style="@style/table_para"
+                    android:background="@drawable/table_znamenatel"
+                    android:text="Алгоритмизация и системный анализ" />
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout style="@style/vertical_conteiner">
+
+                <TextView
+                    android:id="@+id/number3"
+                    style="@style/table_number"
+                    android:text="3" />
+
+                <TextView
+                    android:id="@+id/time3"
+                    style="@style/table_time"
+                    android:text="11:30" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="345dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/para_three_chesl"
+                    style="@style/table_para"
+                    android:background="@drawable/table_cheslitel"
+                    android:text="Проектирование информационных систем" />
+
+                <TextView
+                    android:id="@+id/para_three_znam"
+                    style="@style/table_para"
+                    android:background="@drawable/table_znamenatel"
+                    android:text="Алгоритмизация и системный анализ" />
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout style="@style/vertical_conteiner">
+
+                <TextView
+                    android:id="@+id/number4"
+                    style="@style/table_number"
+                    android:text="4" />
+
+                <TextView
+                    android:id="@+id/time4"
+                    style="@style/table_time"
+                    android:text="13:10" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="345dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/para_four_chesl"
+                    style="@style/table_para"
+                    android:background="@drawable/table_cheslitel"
+                    android:text="Проектирование информационных систем" />
+
+                <TextView
+                    android:id="@+id/para_four_znam"
+                    style="@style/table_para"
+                    android:background="@drawable/table_znamenatel"
+                    android:text="Алгоритмизация и системный анализ" />
+            </LinearLayout>
+
+            <!--            <TextView-->
+            <!--                android:id="@+id/time2"-->
+            <!--                style="@style/table_times"-->
+            <!--                android:text="9:40" />-->
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout style="@style/vertical_conteiner">
+
+                <TextView
+                    android:id="@+id/number5"
+                    style="@style/table_number"
+                    android:text="5" />
+
+                <TextView
+                    android:id="@+id/time5"
+                    style="@style/table_time"
+                    android:text="14:50" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="345dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/para_five_chesl"
+                    style="@style/table_para"
+                    android:background="@drawable/table_cheslitel"
+                    android:text="Проектирование информационных систем" />
+
+                <TextView
+                    android:id="@+id/para_five_znam"
+                    style="@style/table_para"
+                    android:background="@drawable/table_znamenatel"
+                    android:text="Алгоритмизация и системный анализ" />
+            </LinearLayout>
+
+            <!--            <TextView-->
+            <!--                android:id="@+id/time2"-->
+            <!--                style="@style/table_times"-->
+            <!--                android:text="9:40" />-->
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout style="@style/vertical_conteiner">
+
+                <TextView
+                    android:id="@+id/number6"
+                    style="@style/table_number"
+                    android:text="6" />
+
+                <TextView
+                    android:id="@+id/time7"
+                    style="@style/table_time"
+                    android:text="16:30" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="345dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/para_six_chesl"
+                    style="@style/table_para"
+                    android:background="@drawable/table_cheslitel"
+                    android:text="Проектирование информационных систем" />
+
+                <TextView
+                    android:id="@+id/para_six_znam"
+                    style="@style/table_para"
+                    android:background="@drawable/table_znamenatel"
+                    android:text="Алгоритмизация и системный анализ" />
+            </LinearLayout>
+
+            <!--            <TextView-->
+            <!--                android:id="@+id/time2"-->
+            <!--                style="@style/table_times"-->
+            <!--                android:text="9:40" />-->
+        </TableRow>
+
+    </TableLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
