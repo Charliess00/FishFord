@@ -25,19 +25,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tag_conteiner" />
 
-    <ImageView
-        android:id="@+id/avatar"
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/selectedImage"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:contentDescription="@string/todo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/exiticon"
-        app:srcCompat="@drawable/no_avatar"
-        tools:ignore="ImageContrastCheck" />
+        app:civ_border_color="@color/active"
+        app:civ_border_width="2dp"
+        android:src="@drawable/no_avatar"/>
 
     <ImageView
         android:id="@+id/exiticon"
@@ -81,9 +80,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/avatar"
-        app:layout_constraintStart_toStartOf="@+id/avatar"
-        app:layout_constraintTop_toBottomOf="@+id/avatar">
+        app:layout_constraintEnd_toEndOf="@+id/selectedImage"
+        app:layout_constraintStart_toStartOf="@+id/selectedImage"
+        app:layout_constraintTop_toBottomOf="@+id/selectedImage">
 
         <TextView
             android:id="@+id/group"
