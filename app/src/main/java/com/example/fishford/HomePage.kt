@@ -1,10 +1,7 @@
 package com.example.fishford
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.app.Activity.RESULT_OK
 import android.content.Intent
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -42,7 +39,6 @@ class HomePage : AppCompatActivity() {
     private lateinit var edtype: TextView
     private lateinit var week: TextView
     private lateinit var data: TextView
-    private lateinit var btn_avatar: ImageView
     private lateinit var selectedImage: ImageView
     var loading = LoadingDialog(this)
     var name = ""
@@ -50,7 +46,6 @@ class HomePage : AppCompatActivity() {
     var fullname = ""
     var dopgroupe = ""
     var type = ""
-    var avatar = ""
     var photoURL = ""
 
     private fun toLoginPage() {
@@ -190,8 +185,6 @@ class HomePage : AppCompatActivity() {
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
 
             selectedImage.setImageBitmap(bitmap)
-//            val bitnapDrawable = BitmapDrawable(bitmap)
-//            btn_avatar.setBackgroundDrawable(bitnapDrawable)
             uploadImageToFirebaseStorage(refPhoto)
         }
     }
@@ -209,16 +202,6 @@ class HomePage : AppCompatActivity() {
                 setUserUrlImage(it.toString())
             }
             }
-    }
-
-    private fun readUserUrlImage(ref: StorageReference) {
-
-        ref.downloadUrl.addOnSuccessListener {
-            photoURL = it.toString()
-            Picasso.get().load(photoURL)
-                .placeholder(R.drawable.no_avatar)
-                .into(selectedImage)
-        }
     }
 
     private fun setUserUrlImage(avatarUrl: String) {
