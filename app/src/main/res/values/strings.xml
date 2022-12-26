@@ -40,6 +40,7 @@
     <string name="para_4">4 \n<small> 13:10</small></string>
     <string name="para_5">5 \n<small> 14:50</small></string>
     <string name="para_6">6 \n<small> 16:30</small></string>
+    <string name="options_btn_res">Сменить пароль</string>
 
 
 </resources>

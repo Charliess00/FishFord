@@ -155,7 +155,7 @@
         android:text="-"
         android:textColor="@color/dark"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        app:layout_constraintBottom_toTopOf="@+id/table"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -175,13 +175,13 @@
     <ImageView
         android:id="@+id/upload_btn"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
         android:contentDescription="@string/todo"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -189,10 +189,10 @@
         app:srcCompat="@drawable/upload" />
 
     <TableLayout
-        android:id="@+id/tableLayout"
+        android:id="@+id/table"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

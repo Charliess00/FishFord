@@ -25,10 +25,12 @@ import com.squareup.picasso.Picasso
 import java.time.LocalDate
 
 
+@Suppress("DEPRECATION")
 class HomePage : AppCompatActivity() {
 
     private lateinit var exit: ImageView
     private lateinit var option: ImageView
+    private lateinit var table_upload_btn: ImageView
     private lateinit var databaseReference: DatabaseReference
     private var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private var cuid: String = mAuth.currentUser?.uid.toString()
@@ -40,7 +42,11 @@ class HomePage : AppCompatActivity() {
     private lateinit var week: TextView
     private lateinit var data: TextView
     private lateinit var selectedImage: ImageView
+    private lateinit var uriExel: Uri
+    private lateinit var refExel: StorageReference
     var loading = LoadingDialog(this)
+    var IMAGE_REQ_CODE = 0
+    var TABLE_REQ_CODE = 1
     var name = ""
     var groupe = ""
     var fullname = ""
@@ -66,6 +72,7 @@ class HomePage : AppCompatActivity() {
         setContentView(R.layout.activity_home_page)
 
         data = findViewById(R.id.tv_data)
+        table_upload_btn = findViewById(R.id.upload_btn)
         val datastr = LocalDate.now().toString()
         val datalist = datastr.toList()
         val year = datalist.subList(0, 4)
@@ -111,19 +118,29 @@ class HomePage : AppCompatActivity() {
 
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
-            startActivityForResult(intent, 0)
+            startActivityForResult(Intent.createChooser(intent, "Select image"), IMAGE_REQ_CODE)
         }
 
+        table_upload_btn.setOnClickListener{
+            Log.d("Table", "Click table")
 
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            startActivityForResult(Intent.createChooser(intent, "Select xlxs"), TABLE_REQ_CODE)
+        }
 
         option.setOnClickListener {
-            if (type == "Admin"){
+            if (type == "Student"){
+                val toreset = Intent(this, ResetPas::class.java)
+                startActivity(toreset)
+            } else if (type == "Admin" || type == "Leader group"){
                 toOptionPage()
-            }else if (type == "Leader group"){
-                val toreg = Intent(this, Registration::class.java)
-                startActivity(toreg)
             }
         }
+    }
+
+    private fun uploadExelToFirebaseStorage(ref: StorageReference) {
+        ref.putFile(uriExel)
     }
 
     private fun showDialog() {
@@ -146,9 +163,12 @@ class HomePage : AppCompatActivity() {
                         .into(selectedImage)
 
                 }
+
                 fullname = it.child("name").value.toString()
                 edname.text = fullname
                 groupe = it.child("groupe").value.toString()
+                refExel = FirebaseStorage.getInstance().getReference("/exel/$groupe")
+//                table = FirebaseStorage.getInstance().getReference("/exel/$groupe").toString()
                 edgroupe.text = groupe
                 dopgroupe = it.child("dgroupe").value.toString()
                 eddopgroupe.text = dopgroupe
@@ -178,14 +198,22 @@ class HomePage : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if ((requestCode == 0) && (data != null)){
-            Log.d("MyLog", "Photo selected")
+        if (resultCode == RESULT_OK) {
+            if (requestCode == TABLE_REQ_CODE && data != null) {
+                Log.d("Table", "Table selected")
 
-            selectedPhotoUri = data.data
-            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
+                uriExel = data.data!!
+                uploadExelToFirebaseStorage(refExel)
+            }
+            if (requestCode == IMAGE_REQ_CODE && data != null) {
+                Log.d("MyLog", "Photo selected")
 
-            selectedImage.setImageBitmap(bitmap)
-            uploadImageToFirebaseStorage(refPhoto)
+                selectedPhotoUri = data.data
+                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
+
+                selectedImage.setImageBitmap(bitmap)
+                uploadImageToFirebaseStorage(refPhoto)
+            }
         }
     }
 
